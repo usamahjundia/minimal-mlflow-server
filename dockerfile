@@ -1,15 +1,16 @@
 FROM python:3.8.13-slim
 
-ENV DB_USER
-ENV DB_PASS
-ENV DB_HOST
-ENV DB_PORT
-ENV DB_NAME
+ENV POSTGRES_USER=
+ENV POSTGRES_PASSWORD=
+ENV POSTGRES_HOST=
+ENV POSTGRES_DB=
+ENV POSTGRES_PORT=
 
 WORKDIR /home/mlflow
 
-RUN pip install mlflow
+RUN pip install psycopg2-binary mlflow
 
 RUN mkdir mlruns
-
-ENTRYPOINT ["mlflow", "server", "--backend-store-uri", "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"]
+COPY ./entrypoint.sh .
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
