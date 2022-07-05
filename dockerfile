@@ -11,6 +11,7 @@ WORKDIR /home/mlflow
 RUN pip install psycopg2-binary mlflow
 
 RUN mkdir mlruns
+RUN mkdir mlartifacts
 COPY ./entrypoint.sh .
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

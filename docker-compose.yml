@@ -14,7 +14,8 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - artifact_storage:/home/mlflow/mlruns
+      - artifact_storage:/home/mlflow/mlartifacts
+      - runs_storage:/home/mlflow/mlruns
     networks:
       - mlflow
   db:
@@ -33,6 +34,7 @@ services:
 
 volumes:
   db_volume:
+  runs_storage:
   artifact_storage:
 
 networks:
